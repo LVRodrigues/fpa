@@ -4,7 +4,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { AppComponent } from '../../app.component';
-import Keycloak from 'keycloak-js';
 
 @Component({
 	selector: 'app-header',
@@ -20,13 +19,10 @@ export class HeaderComponent {
 
 	constructor(
 		private app: AppComponent,
-		private keycloak: Keycloak
 	) {
 		this.title = app.title;
-		this.username = keycloak.tokenParsed?.['name'];
 	}
 
 	signout(): void {
-		this.keycloak.logout();
 	}
 }
