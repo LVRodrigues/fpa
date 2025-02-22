@@ -4,12 +4,21 @@
         <span id="app-title">{{ title }}</span>
     </section>
 
-    <section id="user-info" class="container">
-        <span i18n="Welcome user mesage">Welcome {{ username }}</span>
-        <mat-divider [vertical]="true"></mat-divider>
-        <button mat-raised-button (click)="signout()">
-            <mat-icon>logout</mat-icon>
-            <span i18n="Sign out Button">Sign out</span>
-        </button>
-    </section>
+    @if (isAuthenticated()) {
+        <section id="user-info" class="container">
+            <span i18n="Welcome user mesage">Welcome {{ username() }}</span>
+            <mat-divider [vertical]="true"></mat-divider>
+            <button mat-raised-button (click)="signout()">
+                <mat-icon>logout</mat-icon>
+                <span i18n="Sign out Button">Sign out</span>
+            </button>
+        </section>
+    } @else {
+        <section id="user-info" class="container">
+            <button mat-raised-button (click)="signin()">
+                <mat-icon>login</mat-icon>
+                <span i18n="Sign in Button">Sign in</span>
+            </button>
+        </section>
+    }
 </header>
