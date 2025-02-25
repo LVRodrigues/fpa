@@ -1,1 +1,81 @@
-<p>home works!</p>,
+<section class="container">
+    <article class="mermaid diagram">
+        block-beta
+        columns 3
+
+        Project:3
+
+        space down1<[" "]>(down) space
+        
+            Frontier:3
+            
+            block:adjusts:3
+                columns 2
+                AF[" Adjustment Factors"] AE["Empiricals Factors"] end space down2<[" "]>(down) space
+        
+            Function:3
+            block:functions:3
+                ALI AIE CE EE SE
+            end
+    </article>
+
+    <article class="infos">
+        <p>A Análise de Pontos de Função (Function Point Analysis - FPA) é uma técnica de medição de 
+            software que quantifica a funcionalidade fornecida ao usuário final com base em uma especificação
+             de requisitos. Ela é usada para estimar o tamanho, esforço e custo do desenvolvimento de software. 
+             Aqui está uma visão geral do método:</p>
+
+        <h3>Passos da Análise de Pontos de Função</h3>
+        
+        <ul>
+            <li>Identificação das Fronteiras do Sistema</li> 
+                <ul>
+                    <li>Defina as fronteiras do sistema a ser medido. A fronteira separa o 
+                        sistema do ambiente externo.</li>
+                </ul>
+            <li>Contagem das Funções de Dados:</li> 
+                <ul>
+                    <li><b>Arquivos Lógicos Internos (ALI)</b>: Conjuntos de dados ou informações que são 
+                        mantidos dentro do sistema.</li>
+                    <li><b>Arquivos de Interface Externa (AIE)</b> Conjuntos de dados ou informações que 
+                        são mantidos fora do sistema, mas são usados pelo sistema.</li>
+                </ul>
+            <li>Contagem das Funções Transacionais:</li>
+                <ul>
+                    <li><b>Entradas Externas (EE)</b> Processos que recebem dados ou informações do usuário.</li>
+                    <li><b>Saídas Externas (SE)</b>: Processos que enviam dados ou informações ao usuário.</li>
+                    <li><b>Consultas Externas (CE)</b>: Processos que envolvem a consulta de dados ou 
+                        informações pelo usuário.</li>
+                </ul>
+            <li>Atribuição de Pesos às Funções</li>
+                <ul>
+                    <li>Cada tipo de função (ALI, AIE, EE, SE, CE) recebe um peso baseado na 
+                        complexidade (Baixa, Média, Alta).</li>
+                </ul>
+            <li>Cálculo dos Pontos de Função Não Ajustados (PFNA)</li>
+                <ul>
+                    <li>Multiplique a quantidade de cada tipo de função pelo seu respectivo
+                         peso e some os resultados.</li>
+                </ul>
+            <li>Ajuste dos Pontos de Função</li>
+                <ul>
+                    <li>Aplique fatores de ajuste baseados em características gerais do sistema, como 
+                        desempenho, segurança, etc. Isso resulta nos Pontos de Função Ajustados (PFA).</li>
+                </ul>
+        </ul>   
+        <!--
+        ### Fórmula Básica
+        
+        \[ \text{PFA} = \text{PFNA} \times (0.65 + 0.01 \times \sum \text{Fatores de Ajuste}) \]
+        
+        ### Benefícios da FPA
+        
+        - **Estimativas Precisas**: Ajuda a fornecer estimativas mais precisas de esforço e custo.
+        - **Comparação de Projetos**: Permite a comparação de diferentes projetos de software.
+        - **Medição de Produtividade**: Facilita a medição da produtividade da equipe de desenvolvimento.
+        
+        A Análise de Pontos de Função é uma técnica padronizada e amplamente utilizada na indústria de 
+        software para medir a funcionalidade e complexidade de sistemas de software.
+        -->
+    </article>
+</section>
