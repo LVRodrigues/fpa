@@ -11,7 +11,10 @@
             
             block:adjusts:3
                 columns 2
-                AF[" Adjustment Factors"] AE["Empiricals Factors"] end space down2<[" "]>(down) space
+                AF["Adjustment Factors"] AE["Empiricals Factors"] 
+            end 
+            
+            space down2<[" "]>(down) space
         
             Function:3
             block:functions:3
@@ -20,15 +23,21 @@
     </article>
 
     <article class="infos">
-        <p>A Análise de Pontos de Função (Function Point Analysis - FPA) é uma técnica de medição de 
+        <header>
+            <h2>Introdução à Análise de Pontos de Função</h2>
+        </header>
+
+        <p>
+            A Análise de Pontos de Função (Function Point Analysis - FPA) é uma técnica de medição de 
             software que quantifica a funcionalidade fornecida ao usuário final com base em uma especificação
              de requisitos. Ela é usada para estimar o tamanho, esforço e custo do desenvolvimento de software. 
-             Aqui está uma visão geral do método:</p>
+             Aqui está uma visão geral do método:
+        </p>
 
         <h3>Passos da Análise de Pontos de Função</h3>
         
-        <ul>
-            <li>Identificação das Fronteiras do Sistema</li> 
+        <ol>
+            <li>Identificação das Fronteiras do Sistema:</li> 
                 <ul>
                     <li>Defina as fronteiras do sistema a ser medido. A fronteira separa o 
                         sistema do ambiente externo.</li>
@@ -56,26 +65,34 @@
                 <ul>
                     <li>Multiplique a quantidade de cada tipo de função pelo seu respectivo
                          peso e some os resultados.</li>
+                    <li><i>Essa etapa é realizada automaticamente pelo sistema.</i></li>
                 </ul>
             <li>Ajuste dos Pontos de Função</li>
                 <ul>
                     <li>Aplique fatores de ajuste baseados em características gerais do sistema, como 
                         desempenho, segurança, etc. Isso resulta nos Pontos de Função Ajustados (PFA).</li>
+                    <li><i>Os ajustes são recalculados automaticamente pelo sistema.</i></li>
                 </ul>
-        </ul>   
-        <!--
-        ### Fórmula Básica
+        </ol>   
+
+        <h2>Fórmula</h2>
+
+        <blockquote>
+            <b>PFA = PFNA x (0.65 + 0.01 x Σ Fatores de Ajuste)</b>
+        </blockquote>
+       
+        <h2>Benefícios da FPA</h2>
         
-        \[ \text{PFA} = \text{PFNA} \times (0.65 + 0.01 \times \sum \text{Fatores de Ajuste}) \]
-        
-        ### Benefícios da FPA
-        
-        - **Estimativas Precisas**: Ajuda a fornecer estimativas mais precisas de esforço e custo.
-        - **Comparação de Projetos**: Permite a comparação de diferentes projetos de software.
-        - **Medição de Produtividade**: Facilita a medição da produtividade da equipe de desenvolvimento.
-        
-        A Análise de Pontos de Função é uma técnica padronizada e amplamente utilizada na indústria de 
-        software para medir a funcionalidade e complexidade de sistemas de software.
-        -->
+        <ul>
+            <li><b>Estimativas Precisas</b> Ajuda a fornecer estimativas mais precisas de esforço e custo.</li>
+            <li><b>Comparação de Projetos</b> Permite a comparação de diferentes projetos de software.</li>
+            <li><b>Medição de Produtividade</b> Facilita a medição da produtividade da equipe de desenvolvimento.</li>
+            <li><b>Planejamento de Recursos</b> Ajuda a planejar recursos e cronogramas de projetos de software.</li>
+        </ul>
+
+        <p>
+            A Análise de Pontos de Função é uma técnica padronizada e amplamente utilizada na indústria de 
+            software para medir a funcionalidade e complexidade de sistemas de software.
+        </p>
     </article>
 </section>
