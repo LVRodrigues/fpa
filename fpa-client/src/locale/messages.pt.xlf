@@ -1,15 +1,343 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
-  <file source-language="en-US" datatype="plaintext" original="ng2.template">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
       <trans-unit id="2695866555301003713" datatype="html">
         <source>FPA Calculator</source>
-        <target>APF Calculadora</target>
+        <target>Calculadora FPA</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/app.component.ts</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">14</context>
         </context-group>
         <note priority="1" from="description">Application Title</note>
+      </trans-unit>
+      <trans-unit id="7874641980921552433" datatype="html">
+        <source>Welcome <x id="INTERPOLATION" equiv-text="{{ username() }}"/></source>
+        <target>Bem-vindo <x id="INTERPOLATION" equiv-text="{{ username() }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/header.component.html</context>
+          <context context-type="linenumber">9,10</context>
+        </context-group>
+        <note priority="1" from="description">Welcome user mesage</note>
+      </trans-unit>
+      <trans-unit id="2949848596707725099" datatype="html">
+        <source>Sign out</source>
+        <target>Sair</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/header.component.html</context>
+          <context context-type="linenumber">13,14</context>
+        </context-group>
+        <note priority="1" from="description">Sign out Button</note>
+      </trans-unit>
+      <trans-unit id="5207635742003539443" datatype="html">
+        <source>Sign in</source>
+        <target>Entrar</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/header/header.component.html</context>
+          <context context-type="linenumber">20,21</context>
+        </context-group>
+        <note priority="1" from="description">Sign in Button</note>
+      </trans-unit>
+      <trans-unit id="4588433998250975863" datatype="html">
+        <source>Introduction to Function Point Analysis</source>
+        <target>Introdução à Análise de Pontos de Função</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">28,31</context>
+        </context-group>
+        <note priority="1" from="description">Introduction of FPA title</note>
+      </trans-unit>
+      <trans-unit id="2756130703855588410" datatype="html">
+        <source> Function Point Analysis (FPA) is a software measurement technique that quantifies the functionality provided to the end user based on a requirements specification. It is used to estimate the size, effort, and cost of software development. Here is an overview of the method: </source>
+        <target> A Análise de Pontos de Função (FPA) é uma técnica de medição de software que quantifica a funcionalidade fornecida ao usuário final com base em uma especificação de requisitos. É usada para estimar o tamanho, esforço e custo do desenvolvimento de software. Aqui está uma visão geral do método: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">32,34</context>
+        </context-group>
+        <note priority="1" from="description">Introduction of FPA</note>
+      </trans-unit>
+      <trans-unit id="7294996279873381676" datatype="html">
+        <source>Steps of Function Point Analysis</source>
+        <target>Etapas da Análise de Pontos de Função</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">37,40</context>
+        </context-group>
+        <note priority="1" from="description">Steps for FPA</note>
+      </trans-unit>
+      <trans-unit id="7254594801544190368" datatype="html">
+        <source>Identification of System Boundaries:</source>
+        <target>Identificação dos Limites do Sistema:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">40,42</context>
+        </context-group>
+        <note priority="1" from="description">Steps - boundaries</note>
+      </trans-unit>
+      <trans-unit id="6175032453262755892" datatype="html">
+        <source>Define the boundaries of the system to be measured. The boundary separates the system from the external environment.</source>
+        <target>Defina os limites do sistema a ser medido. O limite separa o sistema do ambiente externo.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">42,44</context>
+        </context-group>
+        <note priority="1" from="description">Steps - boundaries description</note>
+      </trans-unit>
+      <trans-unit id="4345898787931395516" datatype="html">
+        <source>Counting Data Functions:</source>
+        <target>Contagem de Funções de Dados:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">45,47</context>
+        </context-group>
+        <note priority="1" from="description">Steps - Counting Data Functions</note>
+      </trans-unit>
+      <trans-unit id="7263100322998055210" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Internal Logical Files (ILF)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Sets of data or information that are maintained within the system.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Arquivos Lógicos Internos (ILF)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Conjuntos de dados ou informações que são mantidos dentro do sistema.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">47,48</context>
+        </context-group>
+        <note priority="1" from="description">Steps - counting ILF</note>
+      </trans-unit>
+      <trans-unit id="5485435015878555124" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>External Interface Files (EIF)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Sets of data or information that are maintained outside the system but are used by the system.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Arquivos de Interface Externa (EIF)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Conjuntos de dados ou informações que são mantidos fora do sistema, mas são usados pelo sistema.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">49,50</context>
+        </context-group>
+        <note priority="1" from="description">Steps - counting EIF</note>
+      </trans-unit>
+      <trans-unit id="7354247362524505762" datatype="html">
+        <source>Counting Transactional Functions:</source>
+        <target>Contagem de Funções Transacionais:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">52,54</context>
+        </context-group>
+        <note priority="1" from="description">Steps - Couning Transactional Functions</note>
+      </trans-unit>
+      <trans-unit id="5606749421847953878" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>External Inputs (EI)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Processes that receive data or information from the user.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Entradas Externas (EI)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Processos que recebem dados ou informações do usuário.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">54,55</context>
+        </context-group>
+        <note priority="1" from="description">Steps - counting EI</note>
+      </trans-unit>
+      <trans-unit id="5060850371166263747" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>External Outputs (EO)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Processes that send data or information to the user.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Saídas Externas (EO)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Processos que enviam dados ou informações ao usuário.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">55,56</context>
+        </context-group>
+        <note priority="1" from="description">Steps - counting EO</note>
+      </trans-unit>
+      <trans-unit id="7619603774607066990" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>External Inquiries (EQ)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Processes that involve querying data or information by the user. </source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Consultas Externas (EQ)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Processos que envolvem a consulta de dados ou informações pelo usuário. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">56,57</context>
+        </context-group>
+        <note priority="1" from="description">Steps - counting EQ</note>
+      </trans-unit>
+      <trans-unit id="4253204316291804619" datatype="html">
+        <source>Assigning Weights to Functions</source>
+        <target>Atribuição de Pesos às Funções</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">59,61</context>
+        </context-group>
+        <note priority="1" from="description">Steps - Assigning Weigts to Functions</note>
+      </trans-unit>
+      <trans-unit id="5289738345637007468" datatype="html">
+        <source>Each type of function (ILF, EIF, EI, EO, EQ) is assigned a weight based on complexity (Low, Medium, High).</source>
+        <target>Cada tipo de função (ILF, EIF, EI, EO, EQ) é atribuído um peso com base na complexidade (Baixa, Média, Alta).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">61,64</context>
+        </context-group>
+        <note priority="1" from="description">Steps - Assigning Weigts to Functions description</note>
+      </trans-unit>
+      <trans-unit id="1088380685511770425" datatype="html">
+        <source>Calculating Unadjusted Function Points (UFP)</source>
+        <target>Calculando Pontos de Função Não Ajustados (UFP)</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">64,66</context>
+        </context-group>
+        <note priority="1" from="description">Steps - Calculating UFP</note>
+      </trans-unit>
+      <trans-unit id="5736512968192066493" datatype="html">
+        <source>Multiply the quantity of each type of function by its respective weight and sum the results. </source>
+        <target>Multiplique a quantidade de cada tipo de função pelo seu respectivo peso e some os resultados. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">66,68</context>
+        </context-group>
+        <note priority="1" from="description">Steps - Calculating UFP description</note>
+      </trans-unit>
+      <trans-unit id="6019513979877468120" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>This step is performed automatically by the system.<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Esta etapa é realizada automaticamente pelo sistema.<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+        <note priority="1" from="description">Steps - Calculating UFP note</note>
+      </trans-unit>
+      <trans-unit id="8768390528206284228" datatype="html">
+        <source>Adjusting Function Points</source>
+        <target>Ajustando Pontos de Função</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">70,72</context>
+        </context-group>
+        <note priority="1" from="description">Step - Adjusting Function Points</note>
+      </trans-unit>
+      <trans-unit id="5454872761425912362" datatype="html">
+        <source>Apply adjustment factors based on general characteristics of the system, such as performance, security, etc. This results in the Adjusted Function Points (AFP).</source>
+        <target>Aplicar fatores de ajuste com base nas características gerais do sistema, como desempenho, segurança, etc. Isso resulta nos Pontos de Função Ajustados (AFP).</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">72,74</context>
+        </context-group>
+        <note priority="1" from="description">Step - Adjusting Function Points description</note>
+      </trans-unit>
+      <trans-unit id="8733084417127928535" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>The adjustments are recalculated automatically by the system.<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></source>
+        <target><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i&gt;"/>Os ajustes são recalculados automaticamente pelo sistema.<x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i&gt;"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">74,75</context>
+        </context-group>
+        <note priority="1" from="description">Step - Adjusting Function Points note</note>
+      </trans-unit>
+      <trans-unit id="7622175437440096135" datatype="html">
+        <source>Formula</source>
+        <target>Fórmula</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">78,80</context>
+        </context-group>
+        <note priority="1" from="description">Formula</note>
+      </trans-unit>
+      <trans-unit id="afp-formula" datatype="html">
+        <source>AFP = UFP x [0.65 + (0.01 x Σ(Adjustment Factors))]</source>
+        <target>AFP = UFP x [0.65 + (0.01 x Σ(Fatores de Ajuste))]</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">81,83</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="formula-desc" datatype="html">
+        <source>Where:</source>
+        <target>Onde:</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">83,86</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="afp" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>AFP (Adjusted Function Points)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: final value that represents the adjusted measure of the software&apos;s functionality, taking into account various complexity factors.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>AFP (Pontos de Função Ajustados)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: valor final que representa a medida ajustada da funcionalidade do software, levando em consideração vários fatores de complexidade.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">86,87</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ufp" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>UFP (Unadjusted Function Points)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: initial measure of the software&apos;s functionality, calculated based on the number and complexity of data and transactional functions without any adjustments.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>UFP (Pontos de Função Não Ajustados)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: medida inicial da funcionalidade do software, calculada com base no número e na complexidade das funções de dados e transacionais sem quaisquer ajustes.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">88,90</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="adjustment-factors" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Σ(Adjustment Factors)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: the sum of all adjustment factors that account for various characteristics of the system, such as performance, security, and other attributes that affect its complexity.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Σ(Fatores de Ajuste)<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: a soma de todos os fatores de ajuste que levam em consideração várias características do sistema, como desempenho, segurança e outros atributos que afetam sua complexidade.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">91,93</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="constant-factor" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>0.65<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: constant factor that represents a baseline level of complexity for the software system.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>0.65<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: fator constante que representa um nível básico de complexidade para o sistema de software.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">94,95</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="conversion-factor" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>0.01<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: a conversion factor that converts the adjustment factors from percentage points to a decimal form.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>0.01<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: um fator de conversão que converte os fatores de ajuste de pontos percentuais para uma forma decimal.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">96,97</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="formula-explanation" datatype="html">
+        <source> The formula for calculating Adjusted Function Points (AFP) takes into account the Unadjusted Function Points (UFP) and adjusts them based on various factors that affect the system&apos;s complexity and performance. The constant factor 0.65 represents a baseline level of complexity, while the sum of the adjustment factors, multiplied by 0.01, accounts for additional complexities. This adjustment ensures that the final AFP value accurately reflects the overall functionality and complexity of the software system. </source>
+        <target> A fórmula para calcular os Pontos de Função Ajustados (AFP) leva em consideração os Pontos de Função Não Ajustados (UFP) e os ajusta com base em vários fatores que afetam a complexidade e o desempenho do sistema. O fator constante 0.65 representa um nível básico de complexidade, enquanto a soma dos fatores de ajuste, multiplicada por 0.01, leva em consideração complexidades adicionais. Este ajuste garante que o valor final do AFP reflita com precisão a funcionalidade geral e a complexidade do sistema de software. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">102,106</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="benefits" datatype="html">
+        <source>Benefits of FPA</source>
+        <target>Benefícios da FPA</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">110,113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="benefit1" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Accurate Estimates<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Helps provide more accurate estimates of effort and cost.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Estimativas Precisas<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Ajuda a fornecer estimativas mais precisas de esforço e custo.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">113,114</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="benefit2" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Project Comparison<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Allows comparison of different software projects.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Comparação de Projetos<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Permite a comparação de diferentes projetos de software.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">114,115</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="benefit3" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Productivity Measurement<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Facilitates the measurement of the development team&apos;s productivity. </source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Medição de Produtividade<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Facilita a medição da produtividade da equipe de desenvolvimento. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">115,117</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="benefit4" datatype="html">
+        <source><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Resource Planning<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Helps plan resources and schedules for software projects.</source>
+        <target><x id="START_BOLD_TEXT" ctype="x-b" equiv-text="&lt;b&gt;"/>Planejamento de Recursos<x id="CLOSE_BOLD_TEXT" ctype="x-b" equiv-text="&lt;/b&gt;"/>: Ajuda a planejar recursos e cronogramas para projetos de software.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">117,118</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fpa-summary" datatype="html">
+        <source> Function Point Analysis is a standardized and widely used technique in the software industry to measure the functionality and complexity of software systems. </source>
+        <target> A Análise de Pontos de Função é uma técnica padronizada e amplamente utilizada na indústria de software para medir a funcionalidade e complexidade dos sistemas de software. </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/home/home.component.html</context>
+          <context context-type="linenumber">121,123</context>
+        </context-group>
       </trans-unit>
     </body>
   </file>

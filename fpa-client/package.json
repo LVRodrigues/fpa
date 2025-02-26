@@ -26,6 +26,7 @@
 		"@angular/router": "^19.1.0",
 		"@auth0/angular-jwt": "^5.2.0",
 		"angular-auth-oidc-client": "19.0.0",
+		"mermaid": "^11.4.1",
 		"moment-timezone": "^0.5.47",
 		"replace-in-file": "^8.3.0",
 		"rxjs": "~7.8.0",

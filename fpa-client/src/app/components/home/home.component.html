@@ -1,1 +1,125 @@
-<p>home works!</p>,
+<section class="container">
+    <article class="mermaid diagram">
+        block-beta
+            columns 3
+
+            Project:3
+
+            space down1<[" "]>(down) space
+            
+            Frontier:3
+            
+            block:adjusts:3
+                columns 2
+                AF[" Adjustment Factors"] AE["Empiricals Factors"] 
+            end
+            
+            space down2<[" "]>(down) space
+        
+            Function:3
+
+            block:functions:3
+                ILF EIF EO EI EQ
+            end
+    </article>
+
+    <article class="infos">
+        <header>
+            <h2 i18n="@@fpa-intro-title">Introduction to Function Point Analysis</h2>
+        </header>
+
+        <p i18n="@@fpa-intro">
+            Function Point Analysis (FPA) is a software measurement technique that quantifies the functionality
+            provided to the end user based on a requirements specification. It is used to estimate the size, effort,
+            and cost of software development. Here is an overview of the method:
+        </p>
+
+        <h3 i18n="@@fpa-steps">Steps of Function Point Analysis</h3>
+
+        <ol>
+            <li i18n="@@steps1">Identification of System Boundaries:</li>
+            <ul>
+                <li i18n="@@step1-desc">Define the boundaries of the system to be measured. The boundary separates the system from the
+                    external environment.</li>
+            </ul>
+            <li i18n="@@step2">Counting Data Functions:</li>
+            <ul>
+                <li i18n="@@step2-ilf"><b>Internal Logical Files (ILF)</b>: Sets of data or information that are maintained within the
+                    system.</li>
+                <li i18n="@@step2-eif"><b>External Interface Files (EIF)</b>: Sets of data or information that are maintained outside
+                    the system but are used by the system.</li>
+            </ul>
+            <li i18n="@@step3">Counting Transactional Functions:</li>
+            <ul>
+                <li i18n="@@step3-ei"><b>External Inputs (EI)</b>: Processes that receive data or information from the user.</li>
+                <li i18n="@@step3-eo"><b>External Outputs (EO)</b>: Processes that send data or information to the user.</li>
+                <li i18n="@@step3-eq"><b>External Inquiries (EQ)</b>: Processes that involve querying data or information by the user.
+                </li>
+            </ul>
+            <li i18n="@@step4">Assigning Weights to Functions</li>
+            <ul>
+                <li i18n="@@step4-desc">Each type of function (ILF, EIF, EI, EO, EQ) is assigned a weight based on complexity (Low,
+                    Medium, High).</li>
+            </ul>
+            <li i18n="@@step5">Calculating Unadjusted Function Points (UFP)</li>
+            <ul>
+                <li i18n="@@step5-desc">Multiply the quantity of each type of function by its respective weight and sum the results.
+                </li>
+                <li i18n="@@step5-note"><i>This step is performed automatically by the system.</i></li>
+            </ul>
+            <li i18n="@@step6">Adjusting Function Points</li>
+            <ul>
+                <li i18n="@@step6-desc">Apply adjustment factors based on general characteristics of the system, such as performance,
+                    security, etc. This results in the Adjusted Function Points (AFP).</li>
+                <li i18n="@@step6-note"><i>The adjustments are recalculated automatically by the system.</i></li>
+            </ul>
+        </ol>
+
+        <h2 i18n="@@formula">Formula</h2>
+
+        <blockquote>
+            <b i18n="@@afp-formula">AFP = UFP x [0.65 + (0.01 x Σ(Adjustment Factors))]</b>
+
+            <p i18n="@@formula-desc">Where:</p>
+
+            <ul>
+                <li i18n="@@afp"><b>AFP (Adjusted Function Points)</b>: final value that represents the adjusted
+                    measure of the software's functionality, taking into account various complexity factors.</li>
+                <li i18n="@@ufp"><b>UFP (Unadjusted Function Points)</b>: initial measure of the software's
+                    functionality, calculated based on the number and complexity of data and transactional functions
+                    without any adjustments.</li>
+                <li i18n="@@adjustment-factors"><b>Σ(Adjustment Factors)</b>: the sum of all adjustment factors that account for various
+                    characteristics of the system, such as performance, security, and other attributes that affect
+                    its complexity.</li>
+                <li i18n="@@constant-factor"><b>0.65</b>: constant factor that represents a baseline level of complexity for the
+                    software system.</li>
+                <li i18n="@@conversion-factor"><b>0.01</b>: a conversion factor that converts the adjustment factors from percentage
+                    points to a decimal form.</li>
+            </ul>
+        </blockquote>
+
+        <p i18n="@@formula-explanation">
+            The formula for calculating Adjusted Function Points (AFP) takes into account the Unadjusted Function
+            Points (UFP) and adjusts them based on various factors that affect the system's complexity and
+            performance. The constant factor 0.65 represents a baseline level of complexity, while the sum of the
+            adjustment factors, multiplied by 0.01, accounts for additional complexities. This adjustment ensures
+            that the final AFP value accurately reflects the overall functionality and complexity of the software
+            system.
+        </p>
+
+        <h2 i18n="@@benefits">Benefits of FPA</h2>
+
+        <ul>
+            <li i18n="@@benefit1"><b>Accurate Estimates</b>: Helps provide more accurate estimates of effort and cost.</li>
+            <li i18n="@@benefit2"><b>Project Comparison</b>: Allows comparison of different software projects.</li>
+            <li i18n="@@benefit3"><b>Productivity Measurement</b>: Facilitates the measurement of the development team's productivity.
+            </li>
+            <li i18n="@@benefit4"><b>Resource Planning</b>: Helps plan resources and schedules for software projects.</li>
+        </ul>
+
+        <p i18n="@@fpa-summary">
+            Function Point Analysis is a standardized and widely used technique in the software industry to measure
+            the functionality and complexity of software systems.
+        </p>
+    </article>
+</section>
