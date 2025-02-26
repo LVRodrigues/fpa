@@ -1,98 +1,125 @@
 <section class="container">
     <article class="mermaid diagram">
         block-beta
-        columns 3
+            columns 3
 
-        Project:3
+            Project:3
 
-        space down1<[" "]>(down) space
-        
+            space down1<[" "]>(down) space
+            
             Frontier:3
             
             block:adjusts:3
                 columns 2
-                AF["Adjustment Factors"] AE["Empiricals Factors"] 
-            end 
+                AF[" Adjustment Factors"] AE["Empiricals Factors"] 
+            end
             
             space down2<[" "]>(down) space
         
             Function:3
+
             block:functions:3
-                ALI AIE CE EE SE
+                ILF EIF EO EI EQ
             end
     </article>
 
-    <article class="infos">
-        <header>
-            <h2>Introdução à Análise de Pontos de Função</h2>
-        </header>
+    <article class=" infos">
+            <header>
+                <h2>Introduction to Function Point Analysis</h2>
+            </header>
 
-        <p>
-            A Análise de Pontos de Função (Function Point Analysis - FPA) é uma técnica de medição de 
-            software que quantifica a funcionalidade fornecida ao usuário final com base em uma especificação
-             de requisitos. Ela é usada para estimar o tamanho, esforço e custo do desenvolvimento de software. 
-             Aqui está uma visão geral do método:
-        </p>
+            <p>
+                Function Point Analysis (FPA) is a software measurement technique that quantifies the functionality
+                provided to the end user based on a requirements specification. It is used to estimate the size, effort,
+                and cost of software development. Here is an overview of the method:
+            </p>
 
-        <h3>Passos da Análise de Pontos de Função</h3>
-        
-        <ol>
-            <li>Identificação das Fronteiras do Sistema:</li> 
-                <ul>
-                    <li>Defina as fronteiras do sistema a ser medido. A fronteira separa o 
-                        sistema do ambiente externo.</li>
-                </ul>
-            <li>Contagem das Funções de Dados:</li> 
-                <ul>
-                    <li><b>Arquivos Lógicos Internos (ALI)</b>: Conjuntos de dados ou informações que são 
-                        mantidos dentro do sistema.</li>
-                    <li><b>Arquivos de Interface Externa (AIE)</b> Conjuntos de dados ou informações que 
-                        são mantidos fora do sistema, mas são usados pelo sistema.</li>
-                </ul>
-            <li>Contagem das Funções Transacionais:</li>
-                <ul>
-                    <li><b>Entradas Externas (EE)</b> Processos que recebem dados ou informações do usuário.</li>
-                    <li><b>Saídas Externas (SE)</b>: Processos que enviam dados ou informações ao usuário.</li>
-                    <li><b>Consultas Externas (CE)</b>: Processos que envolvem a consulta de dados ou 
-                        informações pelo usuário.</li>
-                </ul>
-            <li>Atribuição de Pesos às Funções</li>
-                <ul>
-                    <li>Cada tipo de função (ALI, AIE, EE, SE, CE) recebe um peso baseado na 
-                        complexidade (Baixa, Média, Alta).</li>
-                </ul>
-            <li>Cálculo dos Pontos de Função Não Ajustados (PFNA)</li>
-                <ul>
-                    <li>Multiplique a quantidade de cada tipo de função pelo seu respectivo
-                         peso e some os resultados.</li>
-                    <li><i>Essa etapa é realizada automaticamente pelo sistema.</i></li>
-                </ul>
-            <li>Ajuste dos Pontos de Função</li>
-                <ul>
-                    <li>Aplique fatores de ajuste baseados em características gerais do sistema, como 
-                        desempenho, segurança, etc. Isso resulta nos Pontos de Função Ajustados (PFA).</li>
-                    <li><i>Os ajustes são recalculados automaticamente pelo sistema.</i></li>
-                </ul>
-        </ol>   
+            <h3>Steps of Function Point Analysis</h3>
 
-        <h2>Fórmula</h2>
+            <ol>
+                <li>Identification of System Boundaries:</li>
+                <ul>
+                    <li>Define the boundaries of the system to be measured. The boundary separates the system from the
+                        external environment.</li>
+                </ul>
+                <li>Counting Data Functions:</li>
+                <ul>
+                    <li><b>Internal Logical Files (ILF)</b>: Sets of data or information that are maintained within the
+                        system.</li>
+                    <li><b>External Interface Files (EIF)</b>: Sets of data or information that are maintained outside
+                        the system but are used by the system.</li>
+                </ul>
+                <li>Counting Transactional Functions:</li>
+                <ul>
+                    <li><b>External Inputs (EI)</b>: Processes that receive data or information from the user.</li>
+                    <li><b>External Outputs (EO)</b>: Processes that send data or information to the user.</li>
+                    <li><b>External Inquiries (EQ)</b>: Processes that involve querying data or information by the user.
+                    </li>
+                </ul>
+                <li>Assigning Weights to Functions</li>
+                <ul>
+                    <li>Each type of function (ILF, EIF, EI, EO, EQ) is assigned a weight based on complexity (Low,
+                        Medium, High).</li>
+                </ul>
+                <li>Calculating Unadjusted Function Points (UFP)</li>
+                <ul>
+                    <li>Multiply the quantity of each type of function by its respective weight and sum the results.
+                    </li>
+                    <li><i>This step is performed automatically by the system.</i></li>
+                </ul>
+                <li>Adjusting Function Points</li>
+                <ul>
+                    <li>Apply adjustment factors based on general characteristics of the system, such as performance,
+                        security, etc. This results in the Adjusted Function Points (AFP).</li>
+                    <li><i>The adjustments are recalculated automatically by the system.</i></li>
+                </ul>
+            </ol>
 
-        <blockquote>
-            <b>PFA = PFNA x (0.65 + 0.01 x Σ Fatores de Ajuste)</b>
-        </blockquote>
-       
-        <h2>Benefícios da FPA</h2>
-        
-        <ul>
-            <li><b>Estimativas Precisas</b> Ajuda a fornecer estimativas mais precisas de esforço e custo.</li>
-            <li><b>Comparação de Projetos</b> Permite a comparação de diferentes projetos de software.</li>
-            <li><b>Medição de Produtividade</b> Facilita a medição da produtividade da equipe de desenvolvimento.</li>
-            <li><b>Planejamento de Recursos</b> Ajuda a planejar recursos e cronogramas de projetos de software.</li>
-        </ul>
+            <h2>Formula</h2>
 
-        <p>
-            A Análise de Pontos de Função é uma técnica padronizada e amplamente utilizada na indústria de 
-            software para medir a funcionalidade e complexidade de sistemas de software.
-        </p>
+            <blockquote>
+                <b>AFP = UFP x [0.65 + (0.01 x Σ(Adjustment Factors))]</b>
+
+                <p>Where:</p>
+
+                <ul>
+                    <li><b>AFP (Adjusted Function Points)</b>: final value that represents the adjusted
+                        measure of the software's functionality, taking into account various complexity factors.</li>
+                    <li><b>UFP (Unadjusted Function Points)</b>: initial measure of the software's
+                        functionality, calculated based on the number and complexity of data and transactional functions
+                        without any adjustments.</li>
+                    <li><b>Σ(Adjustment Factors)</b>: the sum of all adjustment factors that account for various
+                        characteristics of the system, such as performance, security, and other attributes that affect
+                        its complexity.</li>
+                    <li><b>0.65</b>: constant factor that represents a baseline level of complexity for the
+                        software system.</li>
+                    <li><b>0.01</b>: a conversion factor that converts the adjustment factors from percentage
+                        points to a decimal form.</li>
+                </ul>
+            </blockquote>
+
+            <p>
+                The formula for calculating Adjusted Function Points (AFP) takes into account the Unadjusted Function
+                Points (UFP) and adjusts them based on various factors that affect the system's complexity and
+                performance. The constant factor 0.65 represents a baseline level of complexity, while the sum of the
+                adjustment factors, multiplied by 0.01, accounts for additional complexities. This adjustment ensures
+                that the final AFP value accurately reflects the overall functionality and complexity of the software
+                system.
+            </p>
+
+            <h2>Benefits of FPA</h2>
+
+            <ul>
+                <li><b>Accurate Estimates</b>: Helps provide more accurate estimates of effort and cost.</li>
+                <li><b>Project Comparison</b>: Allows comparison of different software projects.</li>
+                <li><b>Productivity Measurement</b>: Facilitates the measurement of the development team's productivity.
+                </li>
+                <li><b>Resource Planning</b>: Helps plan resources and schedules for software projects.</li>
+            </ul>
+
+            <p>
+                Function Point Analysis is a standardized and widely used technique in the software industry to measure
+                the functionality and complexity of software systems.
+            </p>
     </article>
 </section>

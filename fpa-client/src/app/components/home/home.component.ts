@@ -15,6 +15,11 @@ export class HomeComponent {
             read: () => {
                 void mermaid.initialize({
                     startOnLoad: true,
+                    securityLevel: 'loose',
+                    block: {
+                        useMaxWidth: true,
+                        padding: 10
+                    },
                 });
             },
         })
