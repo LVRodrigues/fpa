@@ -1,5 +1,4 @@
 import { afterNextRender, ChangeDetectionStrategy, Component } from '@angular/core';
-import mermaid from 'mermaid';
 
 @Component({
     selector: 'app-home',
@@ -10,18 +9,4 @@ import mermaid from 'mermaid';
 })
 export class HomeComponent {
 
-    constructor() {
-        afterNextRender({
-            read: () => {
-                void mermaid.initialize({
-                    startOnLoad: true,
-                    securityLevel: 'loose',
-                    block: {
-                        useMaxWidth: true,
-                        padding: 10
-                    },
-                });
-            },
-        })
-    }
 }
