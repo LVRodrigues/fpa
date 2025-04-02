@@ -1,0 +1,55 @@
+<mat-toolbar class="container">
+
+    <div class="container">
+        <button mat-raised-button (click)="navigateToHome()">
+            <mat-icon>home</mat-icon>
+            Home
+        </button>
+
+        @if (showProject()) {
+        <mat-icon>arrow_forward_ios</mat-icon>
+        <button mat-raised-button (click)="navigateToProject()">
+            <mat-icon>folder</mat-icon>
+            Project
+        </button>
+        }
+
+        @if (showBoundary()) {
+        <mat-icon>arrow_forward_ios</mat-icon>
+        <button mat-raised-button (click)="navigateToBoundary()">
+            <mat-icon>select_all</mat-icon>
+            Boundary
+        </button>
+        }
+
+        @if (showFunction()) {
+        <mat-icon>arrow_forward_ios</mat-icon>
+        <button mat-raised-button (click)="navigateToFunction()">
+            <mat-icon>functions</mat-icon>
+            Function
+        </button>
+        }
+    </div>
+
+    <span class="spacer"></span>
+
+    @if (!showProject()) {
+    <button mat-raised-button (click)="navigateToProject()">
+        <mat-icon>folder</mat-icon>
+        Projects
+    </button>
+    }
+    @if (showProject() && !showBoundary()) {
+    <button mat-raised-button (click)="navigateToProject()">
+        <mat-icon>create_new_folder</mat-icon>
+        Add Project
+    </button>
+    }
+    @if (showBoundary() && !showFunction()) {
+    <button mat-raised-button (click)="navigateToBoundary()">
+        <mat-icon>add_to_photos</mat-icon>
+        Add Boundary
+    </button>
+    }
+
+</mat-toolbar>

@@ -1,0 +1,22 @@
+:host {
+	display: block;
+
+	.mat-toolbar {
+		// background-color: var(--mat-sys-tertiary);
+		// color: var(--mat-sys-on-tertiary);
+		background-color: var(----mat-sys-outline-variant);
+		color: var(--mat-sys-on-outline-variant);
+		gap: 5px;
+	}
+
+	.container {
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.container > * {
+		flex: 0 0 auto;
+	}
+
+}

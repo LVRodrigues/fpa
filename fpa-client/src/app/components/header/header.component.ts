@@ -5,10 +5,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { AppComponent } from '../../app.component';
 import { AuthService } from '../../services/auth.service';
+import { MenuComponent } from "../menu/menu.component";
 
 @Component({
 	selector: 'app-header',
-	imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatDividerModule],
+	imports: [MatToolbarModule, MatButtonModule, MatIconModule, MatDividerModule, MenuComponent, MenuComponent],
 	templateUrl: './header.component.html',
 	styleUrl: './header.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
