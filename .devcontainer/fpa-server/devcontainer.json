@@ -19,10 +19,10 @@
 	"workspaceFolder": "/workspaces",
 
 	"features": {
-		// "ghcr.io/devcontainers/features/common-utils:2": {},
-		// "ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
-		// "ghcr.io/schlich/devcontainer-features/powerlevel10k:1": {},
-		// "ghcr.io/nils-geistmann/devcontainers-features/zsh:0": {}
+		"ghcr.io/devcontainers/features/common-utils:2": {},
+		"ghcr.io/stuartleeks/dev-container-features/shell-history:0": {},
+		"ghcr.io/schlich/devcontainer-features/powerlevel10k:1": {},
+		"ghcr.io/nils-geistmann/devcontainers-features/zsh:0": {}
 	},
 
 	"mounts": [

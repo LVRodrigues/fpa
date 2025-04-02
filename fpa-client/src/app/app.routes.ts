@@ -9,10 +9,10 @@ import { FunctionsComponent } from './components/functions/functions.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent, data: { step: Step.NONE } },
-    { path: 'projects', component: ProjectsComponent, data: { step: Step.PROJECT }, canActivate: [isAuthenticated] },
-    { path: 'boundaries', component: BoundariesComponent, data: { step: Step.BOUNDARY }, canActivate: [isAuthenticated] },
-    { path: 'functions', component: FunctionsComponent, data: { step: Step.FUNCTION }, canActivate: [isAuthenticated] },
+    { path: 'home', component: HomeComponent, data: { step: Step.NONE, title: 'Start' } },
+    { path: 'projects', component: ProjectsComponent, data: { step: Step.PROJECT, title: 'Project' }, canActivate: [isAuthenticated] },
+    { path: 'boundaries', component: BoundariesComponent, data: { step: Step.BOUNDARY, title: 'Boundary' }, canActivate: [isAuthenticated] },
+    { path: 'functions', component: FunctionsComponent, data: { step: Step.FUNCTION, title: 'Function' }, canActivate: [isAuthenticated] },
     { path: 'forbidden', component: ForbiddenComponent },
     { path: '**', redirectTo: 'home' }
 ];
