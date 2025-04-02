@@ -6,7 +6,7 @@
             Home
         </button>
 
-        @if (showProject) {
+        @if (showProject()) {
         <mat-icon>arrow_forward_ios</mat-icon>
         <button mat-raised-button (click)="navigateToProject()">
             <mat-icon>folder</mat-icon>
@@ -14,7 +14,7 @@
         </button>
         }
 
-        @if (showBoundary) {
+        @if (showBoundary()) {
         <mat-icon>arrow_forward_ios</mat-icon>
         <button mat-raised-button (click)="navigateToBoundary()">
             <mat-icon>select_all</mat-icon>
@@ -22,7 +22,7 @@
         </button>
         }
 
-        @if (showFunction) {
+        @if (showFunction()) {
         <mat-icon>arrow_forward_ios</mat-icon>
         <button mat-raised-button (click)="navigateToFunction()">
             <mat-icon>functions</mat-icon>
@@ -33,16 +33,22 @@
 
     <span class="spacer"></span>
 
-    @if (!showProject) {
+    @if (!showProject()) {
     <button mat-raised-button (click)="navigateToProject()">
         <mat-icon>folder</mat-icon>
         Projects
     </button>
     }
-    @if (showProject) {
+    @if (showProject() && !showBoundary()) {
     <button mat-raised-button (click)="navigateToProject()">
         <mat-icon>create_new_folder</mat-icon>
         Add Project
+    </button>
+    }
+    @if (showBoundary() && !showFunction()) {
+    <button mat-raised-button (click)="navigateToBoundary()">
+        <mat-icon>add_to_photos</mat-icon>
+        Add Boundary
     </button>
     }
 

@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, OnInit, signal } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { NavigationEnd, Router } from '@angular/router';
-import { BreadcrumbService } from '../../services/breadcrumb.service';
-import { filter } from 'rxjs';
+import { BreadcrumbService, Step } from '../../services/breadcrumb.service';
 
 @Component({
     selector: 'app-menu',
@@ -15,26 +14,25 @@ import { filter } from 'rxjs';
 })
 export class MenuComponent {
 
-    showProject: boolean = false;
-    showBoundary: boolean = false;
-    showFunction: boolean = false;
+    showProject = signal(false);
+    showBoundary = signal(false);
+    showFunction = signal(false);
 
     constructor(
         private router: Router,
         private breadcrumb: BreadcrumbService,
-    ) { 
-        this.router.events.pipe(
-            filter(event => event instanceof NavigationEnd))
-        .subscribe(() => {
-            console.debug('MenuComponent', 'constructor', 'router.events');
-            this.showProject = this.breadcrumb.canShowProject();
-            this.showBoundary = this.breadcrumb.canShowBoundary();
-            this.showFunction = this.breadcrumb.canShowFunction();
-        });
+    ) {
+        effect(() => {
+            console.log('Current step: ', this.breadcrumb.current());
+            const current = this.breadcrumb.current()();
+            this.showProject.set(current > Step.NONE);
+            this.showBoundary.set(current > Step.PROJECT);
+            this.showFunction.set(current > Step.BOUNDARY);
+        })
     }
 
     navigateToHome() {
-       this.router.navigate(['/home']);
+        this.router.navigate(['/home']);
     }
 
     navigateToProject() {

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Signal, signal, WritableSignal } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
 
@@ -14,7 +14,7 @@ export enum Step {
 })
 export class BreadcrumbService {
 
-	private step: Step = Step.NONE;
+	private step: WritableSignal<Step> = signal(Step.NONE);
 
 	constructor(
 		private router: Router
@@ -35,22 +35,11 @@ export class BreadcrumbService {
 				}))
 			.subscribe((step: Step) => {
 				console.debug('BreadcrumbService', 'step', step);
-				this.step = step;
+				this.step.set(step);
 			});
 	}
 
-	canShowProject(): boolean {
-		console.trace('BreadcrumbService', 'canShowProject', this.step);
-		return this.step > Step.NONE;
-	}
-
-	canShowBoundary(): boolean {
-		console.trace('BreadcrumbService', 'canShowBoundary', this.step);
-		return this.step > Step.PROJECT;
-	}
-
-	canShowFunction(): boolean {
-		console.trace('BreadcrumbService', 'canShowFunction', this.step);
-		return this.step > Step.BOUNDARY;
+	current(): Signal<Step>{
+		return this.step.asReadonly();
 	}
 }
