@@ -48,6 +48,37 @@
             "options": {
                 "cwd": "${workspaceFolder}/fpa-client"
             },
+            "detail": "ng serve --configuration development --host=0.0.0.0",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "typescript",
+                "pattern": "$tsc",
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": {
+                        "regexp": "(.*?)"
+                    },
+                    "endsPattern": {
+                        "regexp": "bundle generation complete"
+                    }
+                }
+            }
+        },
+        {
+            "label": "fpa-client start PT",
+            "type": "npm",
+            "script": "pt",
+            "isBackground": true,
+            "options": {
+                "cwd": "${workspaceFolder}/fpa-client"
+            },
+            "detail": "ng serve --configuration pt --host=0.0.0.0 --disable-host-check",
+            "group": {
+                "kind": "build",
+            },
             "problemMatcher": {
                 "owner": "typescript",
                 "pattern": "$tsc",
@@ -84,17 +115,5 @@
                 }
             }
         },
-        {
-            "type": "npm",
-            "script": "start",
-            "path": "fpa-client",
-            "problemMatcher": [],
-            "label": "npm: start - fpa-client",
-            "detail": "ng serve --configuration development --host=0.0.0.0",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
-        }
     ]
 }

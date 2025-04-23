@@ -2,10 +2,10 @@
 	display: block;
 
 	.mat-toolbar {
-		// background-color: var(--mat-sys-tertiary);
-		// color: var(--mat-sys-on-tertiary);
-		background-color: var(----mat-sys-outline-variant);
-		color: var(--mat-sys-on-outline-variant);
+		background-color: var(--mat-sys-secondary-container);
+		color: var(--mat-sys-on-secondary-container);
+		// background-color: var(----mat-sys-outline);
+		// color: var(--mat-sys-on-outline);
 		gap: 5px;
 	}
 

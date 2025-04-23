@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use "./styles/theme-colors.scss" as theme-colors;
 
 :root {
     --logo-size: 50px;
@@ -6,16 +7,18 @@
     --spacing-between: 5px;
 }
 
+
 html {
-    color-scheme: light dark;
-    @include mat.theme((
-        color: (
-            primary: mat.$cyan-palette,
-            tertiary: mat.$blue-palette,
-        ),
-        typography: Roboto,
-        density: 0
-    ));
+    @include mat.theme(
+        (
+            color: (
+                primary: theme-colors.$primary-palette,
+                tertiary: theme-colors.$tertiary-palette,
+            ),
+            typography: Roboto,
+            density: 0,
+        )
+    );
 }
 
 html,
