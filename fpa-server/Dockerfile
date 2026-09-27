@@ -5,10 +5,10 @@ RUN rustup target add x86_64-unknown-linux-gnu
 RUN USER=root cargo new fpa-server
 WORKDIR /usr/src/fpa-server
 COPY Cargo.toml Cargo.lock ./
-RUN cargo build --release
+RUN cargo build --release --locked
 
 COPY src ./src
-RUN cargo install --target x86_64-unknown-linux-gnu --path .
+RUN cargo install --locked --target x86_64-unknown-linux-gnu --path .
 
 FROM debian:stable-slim
 RUN apt update \

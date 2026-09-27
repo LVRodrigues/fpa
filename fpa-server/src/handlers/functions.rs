@@ -221,7 +221,7 @@ pub enum FunctionParam {
 #[into_params(parameter_in = Query)]
 pub struct FunctionsParams {
     /// Index of page to select.
-    #[param(minimum = 1, default = 1)]
+    #[param(minimum = 1, maximum = 184467440737095517_u64, default = 1)]
     #[serde(default, deserialize_with = "page::deserialize_page")]
     page: Option<u64>,
     /// Page's size (records).
@@ -997,4 +997,35 @@ pub async fn remove(
 
     trace!("::: Function {} removed.", function);
     Ok(StatusCode::NO_CONTENT)
+}
+
+#[cfg(test)]
+mod tests {
+    use axum::{extract::Query, http::Uri};
+
+    use super::{page, FunctionsParams};
+
+    fn parse(
+        query: &str,
+    ) -> Result<Query<FunctionsParams>, axum::extract::rejection::QueryRejection> {
+        let uri: Uri = format!("/?{query}").parse().expect("test URI is valid");
+        Query::try_from_uri(&uri)
+    }
+
+    #[test]
+    fn function_pagination_defaults_when_parameters_are_missing() {
+        let Query(params) = parse("").expect("empty query should use defaults");
+
+        assert_eq!(params.page(), 1);
+        assert_eq!(params.size(), 10);
+    }
+
+    #[test]
+    fn function_pagination_rejects_invalid_page_and_size() {
+        assert!(parse("page=0").is_err());
+        assert!(parse("page=9223372036854775807&size=50").is_err());
+        assert!(parse(&format!("page={}&size=50", page::MAX_PAGE + 1)).is_err());
+        assert!(parse("size=0").is_err());
+        assert!(parse("size=51").is_err());
+    }
 }

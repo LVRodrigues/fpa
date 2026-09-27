@@ -46,3 +46,20 @@ SET app.current_tenant = '00000000-0000-0000-0000-000000000000';
 ```
 
 > Even during development, it is recommended to use the user **fpa-user**.
+
+## Dependency and authentication maintenance
+
+`Cargo.lock` is versioned for this application. Use `cargo check --locked` and
+`cargo test --locked` to validate the committed dependency resolution. Docker
+builds also use `--locked`; dependency updates must include the updated lockfile.
+
+JWKS are fetched from the configured issuer URLs at startup and refreshed every
+five minutes. An unknown key ID triggers an additional refresh, limited to one
+attempt per issuer every 30 seconds, including failed attempts. Concurrent
+refreshes are serialized. Failed or invalid responses preserve the last valid
+keys; successful refreshes replace the key set, including removal of old keys.
+Only configured issuers and URLs are used.
+
+Pagination accepts page sizes from 1 to 50. Page indices are limited to
+184467440737095517 so that the offset fits PostgreSQL's signed 64-bit range for
+any supported page size. Invalid pagination parameters return HTTP 400.

@@ -89,7 +89,7 @@ pub async fn require(
     if !jwks::issuers(state.configuration()).iter().any(|issuer| issuer == &unverified_issuer) {
         return Err(Error::TokenInvalid);
     }
-    let key = jwks::key(&unverified_issuer, &kid)?;
+    let key = jwks::key(&unverified_issuer, &kid).await?;
     let key = DecodingKey::from_jwk(&key).map_err(|_| Error::TokenInvalid)?;
 
     let mut validation = Validation::new(header.alg);

@@ -43,7 +43,7 @@ impl AppState {
             "SELECT set_config('app.current_tenant', $1, true)",
             [tenant.into()],
         );
-        trx.execute(statement).await.map_err(|error| {
+        trx.execute_raw(statement).await.map_err(|error| {
             log::error!("Failed to set database tenant context: {error}");
             Error::DatabaseConnection
         })?;

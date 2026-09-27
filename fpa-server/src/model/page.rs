@@ -16,6 +16,9 @@ pub struct Page<T: ToSchema> {
     pub items: Vec<T>,
 }
 
+/// Largest page safe for every supported page size (up to 50).
+pub(crate) const MAX_PAGE: u64 = i64::MAX as u64 / 50 + 1;
+
 /// Deserialize a page index and reject values that cannot safely be used as a
 /// database offset. Missing values keep the documented default.
 pub(crate) fn deserialize_page<'de, D>(deserializer: D) -> Result<Option<u64>, D::Error>
@@ -23,8 +26,14 @@ where
     D: Deserializer<'de>,
 {
     let value = Option::<u64>::deserialize(deserializer)?;
-    if value.is_some_and(|page| page == 0 || page > i64::MAX as u64) {
-        return Err(D::Error::custom("page must be between 1 and i64::MAX"));
+    if value.is_some_and(|page| {
+        page.checked_sub(1)
+            .and_then(|index| index.checked_mul(50))
+            .is_none_or(|offset| offset > i64::MAX as u64)
+    }) {
+        return Err(D::Error::custom(format!(
+            "page must be between 1 and {MAX_PAGE}"
+        )));
     }
     Ok(value)
 }
@@ -58,7 +67,7 @@ impl<T: ToSchema> Page<T> {
 #[into_params(parameter_in = Query)]
 pub struct PageParams {
     /// Index of page to select.
-    #[param(minimum = 1, default = 1)]
+    #[param(minimum = 1, maximum = 184467440737095517_u64, default = 1)]
     #[serde(default, deserialize_with = "deserialize_page")]
     page: Option<u64>,
     /// Page's size (records).
@@ -97,5 +106,57 @@ impl PageParams {
 
     pub fn name(&self) -> Option<String> {
         self.name.clone()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use axum::{extract::Query, http::Uri};
+
+    use super::PageParams;
+
+    fn parse(query: &str) -> Result<Query<PageParams>, axum::extract::rejection::QueryRejection> {
+        let uri: Uri = format!("/?{query}").parse().expect("test URI is valid");
+        Query::try_from_uri(&uri)
+    }
+
+    #[test]
+    fn pagination_defaults_when_parameters_are_missing() {
+        let Query(params) = parse("").expect("empty query should use defaults");
+
+        assert_eq!(params.page(), 1);
+        assert_eq!(params.size(), 10);
+    }
+
+    #[test]
+    fn pagination_accepts_documented_boundaries() {
+        let Query(params) = parse("page=1&size=50").expect("boundary values should be valid");
+
+        assert_eq!(params.page(), 1);
+        assert_eq!(params.size(), 50);
+    }
+
+    #[test]
+    fn pagination_rejects_page_zero() {
+        assert!(parse("page=0").is_err());
+    }
+
+    #[test]
+    fn pagination_rejects_page_larger_than_safe_offset_range() {
+        assert!(parse("page=9223372036854775808").is_err());
+    }
+
+    #[test]
+    fn pagination_bounds_prevent_offset_overflow() {
+        let Query(params) = parse(&format!("page={}&size=50", super::MAX_PAGE)).unwrap();
+        assert!((params.page() - 1).checked_mul(params.size()).unwrap() <= i64::MAX as u64);
+        assert!(parse(&format!("page={}&size=50", super::MAX_PAGE + 1)).is_err());
+        assert!(parse("page=9223372036854775807&size=50").is_err());
+    }
+
+    #[test]
+    fn pagination_rejects_size_outside_one_to_fifty() {
+        assert!(parse("size=0").is_err());
+        assert!(parse("size=51").is_err());
     }
 }
