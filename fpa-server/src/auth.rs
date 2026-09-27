@@ -34,6 +34,7 @@ struct Claims {
     tenant: Uuid,
     name: String,
     email: String,
+    iss: String,
 }
 
 impl Claims {
@@ -55,8 +56,7 @@ pub async fn require(
     debug!("Validating the user token.");
 
     if !jwks::is_prepared() {
-        let config = state.configuration();
-        jwks::prepare(config).await?;
+        return Err(Error::JWKSNotFound);
     }
 
     let token = request
@@ -77,11 +77,25 @@ pub async fn require(
 
     let header = decode_header(&token)?;
 
-    let key = jwks::key(header.kid.unwrap().clone())?;
-    let key = DecodingKey::from_jwk(&key.to_jwk()).unwrap();
+    let kid = header.kid.ok_or(Error::TokenInvalid)?;
+    let unverified_issuer = token.split('.').nth(1)
+        .and_then(|payload| {
+            use base64::Engine;
+            base64::engine::general_purpose::URL_SAFE_NO_PAD.decode(payload).ok()
+        })
+        .and_then(|payload| serde_json::from_slice::<serde_json::Value>(&payload).ok())
+        .and_then(|claims| claims.get("iss")?.as_str().map(str::to_owned))
+        .ok_or(Error::TokenInvalid)?;
+    if !jwks::issuers(state.configuration()).iter().any(|issuer| issuer == &unverified_issuer) {
+        return Err(Error::TokenInvalid);
+    }
+    let key = jwks::key(&unverified_issuer, &kid)?;
+    let key = DecodingKey::from_jwk(&key).map_err(|_| Error::TokenInvalid)?;
 
     let mut validation = Validation::new(header.alg);
     validation.set_audience(&[AUDIENCE]);
+    validation.set_issuer(&[unverified_issuer.as_str()]);
+    validation.set_required_spec_claims(&["exp", "iss", "aud", "sub"]);
 
     let claims = decode::<Claims>(&token, &key, &validation)?.claims;
     request.extensions_mut().insert(claims.to_context());
@@ -97,7 +111,7 @@ pub async fn user_register(
 ) -> Result<Response, Error> {
     debug!("Registering the new user.");
 
-    let ctx = context.unwrap();
+    let ctx = context.ok_or(Error::ContextInvalid)?;
 
     let db = state.connection(ctx.tenant()).await?;
     let user = match Users::find_by_id(*ctx.id()).one(&db).await {

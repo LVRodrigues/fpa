@@ -1,5 +1,4 @@
-use serde::Serialize;
-use serde_derive::Deserialize;
+use serde::{de::Error as _, Deserialize, Deserializer, Serialize};
 use utoipa::{IntoParams, ToResponse, ToSchema};
 
 /// Page selected.
@@ -15,6 +14,31 @@ pub struct Page<T: ToSchema> {
     pub records: u64,
     /// List of records.
     pub items: Vec<T>,
+}
+
+/// Deserialize a page index and reject values that cannot safely be used as a
+/// database offset. Missing values keep the documented default.
+pub(crate) fn deserialize_page<'de, D>(deserializer: D) -> Result<Option<u64>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let value = Option::<u64>::deserialize(deserializer)?;
+    if value.is_some_and(|page| page == 0 || page > i64::MAX as u64) {
+        return Err(D::Error::custom("page must be between 1 and i64::MAX"));
+    }
+    Ok(value)
+}
+
+/// Deserialize a page size and enforce the public API limit.
+pub(crate) fn deserialize_page_size<'de, D>(deserializer: D) -> Result<Option<u64>, D::Error>
+where
+    D: Deserializer<'de>,
+{
+    let value = Option::<u64>::deserialize(deserializer)?;
+    if value.is_some_and(|size| !(1..=50).contains(&size)) {
+        return Err(D::Error::custom("size must be between 1 and 50"));
+    }
+    Ok(value)
 }
 
 impl<T: ToSchema> Page<T> {
@@ -35,9 +59,11 @@ impl<T: ToSchema> Page<T> {
 pub struct PageParams {
     /// Index of page to select.
     #[param(minimum = 1, default = 1)]
+    #[serde(default, deserialize_with = "deserialize_page")]
     page: Option<u64>,
     /// Page's size (records).
     #[param(minimum = 1, maximum = 50, default = 10)]
+    #[serde(default, deserialize_with = "deserialize_page_size")]
     size: Option<u64>,
     /// Filter by name.
     #[param()]
@@ -58,14 +84,14 @@ impl PageParams {
     pub fn page(&self) -> u64 {
         match self.page {
             Some(v) => v,
-            None => Self::default().page.unwrap(),
+            None => 1,
         }
     }
 
     pub fn size(&self) -> u64 {
         match self.size {
             Some(v) => v,
-            None => Self::default().size.unwrap(),
+            None => 10,
         }
     }
 

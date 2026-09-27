@@ -17,7 +17,7 @@ use serde_json::json;
 use utoipa::{IntoParams, ToSchema};
 use uuid::Uuid;
 
-use crate::model::{alrs, ders, functions_datas, functions_transactions, prelude::*, rlrs};
+use crate::model::{alrs, ders, functions_datas, functions_transactions, page, prelude::*, rlrs};
 use crate::{
     ctx::Context,
     error::{Error, ErrorResponse},
@@ -222,9 +222,11 @@ pub enum FunctionParam {
 pub struct FunctionsParams {
     /// Index of page to select.
     #[param(minimum = 1, default = 1)]
+    #[serde(default, deserialize_with = "page::deserialize_page")]
     page: Option<u64>,
     /// Page's size (records).
     #[param(minimum = 1, maximum = 50, default = 10)]
+    #[serde(default, deserialize_with = "page::deserialize_page_size")]
     size: Option<u64>,
     /// Filter by name.
     #[param()]
@@ -248,14 +250,14 @@ impl FunctionsParams {
     pub fn page(&self) -> u64 {
         match self.page {
             Some(v) => v,
-            None => Self::default().page.unwrap(),
+            None => 1,
         }
     }
 
     pub fn size(&self) -> u64 {
         match self.size {
             Some(v) => v,
-            None => Self::default().size.unwrap(),
+            None => 10,
         }
     }
 
@@ -834,8 +836,8 @@ async fn update_function_data(
     let data: functions_datas::Model = match data.update(db).await {
         Ok(v) => v,
         Err(e) => {
-            match e.sql_err().unwrap() {
-                sea_orm::SqlErr::UniqueConstraintViolation(_) => {
+            match e.sql_err() {
+                Some(sea_orm::SqlErr::UniqueConstraintViolation(_)) => {
                     return Err(Error::FunctionNameDuplicated)
                 }
                 _ => return Err(Error::FunctionUpdate),
@@ -900,8 +902,8 @@ async fn update_function_transaction(
     let data: functions_transactions::Model = match data.update(db).await {
         Ok(v) => v,
         Err(e) => {
-            match e.sql_err().unwrap() {
-                sea_orm::SqlErr::UniqueConstraintViolation(_) => {
+            match e.sql_err() {
+                Some(sea_orm::SqlErr::UniqueConstraintViolation(_)) => {
                     return Err(Error::FunctionNameDuplicated)
                 }
                 _ => return Err(Error::FunctionUpdate),

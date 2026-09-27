@@ -8,13 +8,13 @@ Project Management using Function Points Analysis.
 ![Static Badge](https://img.shields.io/badge/RLS-yellow)
 ![Static Badge](https://img.shields.io/badge/Multi_Tennant-yellow)
 
-![Static Badge](https://img.shields.io/badge/keycloak-26.1.0-blue?logo=openid)
+![Static Badge](https://img.shields.io/badge/keycloak-26.7.4-blue?logo=openid)
 ![Static Badge](https://img.shields.io/badge/SSO-yellow)
 ![Static Badge](https://img.shields.io/badge/OAuth_2.0-yellow)
 ![Static Badge](https://img.shields.io/badge/OpenID_Connect-yellow)
 ![Static Badge](https://img.shields.io/badge/Multi_Tennant-yellow)
 
-![Static Badge](https://img.shields.io/badge/rust-1.83-blue?logo=rust)
+![Static Badge](https://img.shields.io/badge/rust-1.98.1-blue?logo=rust)
 ![Static Badge](https://img.shields.io/badge/REST_API-yellow)
 ![Static Badge](https://img.shields.io/badge/Axum-yellow)
 ![Static Badge](https://img.shields.io/badge/Sea_ORM-yellow)

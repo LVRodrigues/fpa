@@ -22,5 +22,8 @@
         "angular-*": {
             "externalTemplate": true
         }
+    },
+    "chat.tools.terminal.autoApprove": {
+        "cargo check": true
     }
 }

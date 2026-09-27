@@ -36,12 +36,10 @@ async fn prepare_connection(config: &Configuration) -> Result<DatabaseConnection
         .idle_timeout(Duration::from_secs(config.database.timeout_idle))
         .max_lifetime(Duration::from_secs(config.database.lifetime));
     let conn = Database::connect(options.clone()).await;
-    let conn = match conn {
-        Ok(v) => v,
-        Err(_) => return Err(Error::DatabaseConnection),
-    };
-
-    Ok(conn)
+    conn.map_err(|error| {
+        log::error!("Database connection failed: {error}");
+        Error::DatabaseConnection
+    })
 }
 
 pub async fn router(config: Configuration) -> Result<Router, Error> {

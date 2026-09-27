@@ -1,85 +1,69 @@
-use std::{
-    collections::HashMap,
-    sync::{Arc, Mutex, OnceLock},
-};
+use std::{collections::HashMap, sync::{Arc, OnceLock, RwLock}};
 
 use jsonwebtoken::jwk::Jwk;
 use log::{debug, info};
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
-use crate::{configuration::Configuration, error::Error};
+use crate::{configuration::{Configuration, JwksConfiguration}, error::Error};
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
-pub struct Key {
-    pub kid: String,
-    pub kty: String,
-    pub alg: String,
-    #[serde(rename = "use")]
-    pub use_for: String,
-    pub n: String,
-    pub e: String,
-    pub x5c: Vec<String>,
-    pub x5t: String,
-    #[serde(rename = "x5t#S256")]
-    pub x5t_s256: String,
-}
-
-impl Key {
-    pub fn to_jwk(&self) -> Jwk {
-        let jwk_str = serde_json::to_string(&self).expect("Failed to serialize JWK");
-        serde_json::from_str(&jwk_str).expect("Failed to deserialize JWK")
-    }
-}
-
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize)]
 struct Keys {
-    #[serde(rename = "keys")]
-    items: Vec<Key>,
+    #[serde(default, rename = "keys")]
+    items: Vec<Jwk>,
 }
 
-static KEYS: OnceLock<Arc<Mutex<HashMap<String, Key>>>> = OnceLock::new();
+#[derive(Debug, Clone)]
+struct IssuerKeys {
+    keys: HashMap<String, Jwk>,
+}
 
-async fn request_jwks(tenant: String) -> Result<Keys, Error> {
-    let jwks: Keys = reqwest::Client::new()
-        .get(tenant)
-        .send()
-        .await?
-        .json()
-        .await?;
+static KEYS: OnceLock<Arc<RwLock<HashMap<String, IssuerKeys>>>> = OnceLock::new();
 
-    Ok(jwks)
+async fn request_jwks(client: &reqwest::Client, url: &str) -> Result<Keys, Error> {
+    let response = client.get(url).send().await?.error_for_status()?;
+    Ok(response.json().await?)
 }
 
 pub async fn prepare(config: &Configuration) -> Result<(), Error> {
     info!("Preparing JWKS...");
+    let client = reqwest::Client::builder()
+        .timeout(std::time::Duration::from_secs(10))
+        .build()
+        .map_err(|_| Error::JWKSNotFound)?;
+    let mut issuers = HashMap::new();
 
-    let keys = Arc::new(Mutex::new(HashMap::new()));
-
-    for jwks in &config.jwks {
-        debug!("Requesting JWKS from {}", jwks);
-        let ks = request_jwks(jwks.clone()).await?;
-        for key in ks.items {
-            keys.lock().unwrap().insert(key.kid.clone(), key);
+    for source in &config.jwks {
+        debug!("Requesting JWKS for issuer {} from {}", source.issuer, source.url);
+        let jwks = request_jwks(&client, &source.url).await?;
+        let mut keys = HashMap::new();
+        for jwk in jwks.items {
+            let kid = jwk.common.key_id.clone().ok_or(Error::JWKSNotFound)?;
+            if keys.insert(kid, jwk).is_some() {
+                return Err(Error::JWKSNotFound);
+            }
+        }
+        if keys.is_empty() || issuers.insert(source.issuer.clone(), IssuerKeys { keys }).is_some() {
+            return Err(Error::JWKSNotFound);
         }
     }
 
-    KEYS.set(keys).unwrap();
-
+    KEYS.set(Arc::new(RwLock::new(issuers))).map_err(|_| Error::JWKSNotFound)?;
     Ok(())
 }
 
-pub fn key(kid: String) -> Result<Key, Error> {
-    let keys = KEYS.get().unwrap().lock().unwrap();
-
-    let key = keys.get(&kid).cloned();
-    let key = match key {
-        Some(k) => k,
-        None => return Err(Error::KeyNotFound),
-    };
-
-    Ok(key)
+pub fn key(issuer: &str, kid: &str) -> Result<Jwk, Error> {
+    let keys = KEYS.get().ok_or(Error::JWKSNotFound)?;
+    let keys = keys.read().map_err(|_| Error::JWKSNotFound)?;
+    keys.get(issuer)
+        .and_then(|source| source.keys.get(kid))
+        .cloned()
+        .ok_or(Error::KeyNotFound)
 }
 
 pub fn is_prepared() -> bool {
     KEYS.get().is_some()
+}
+
+pub fn issuers(config: &Configuration) -> Vec<String> {
+    config.jwks.iter().map(|source: &JwksConfiguration| source.issuer.clone()).collect()
 }

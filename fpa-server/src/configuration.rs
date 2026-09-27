@@ -1,4 +1,4 @@
-use std::{path::Path, str::FromStr};
+use std::{error::Error, path::Path, str::FromStr};
 
 use axum::http::uri::Scheme;
 use config::{Config, File};
@@ -34,44 +34,56 @@ pub struct Configuration {
     pub scheme: Scheme,
     pub authority: String,
     pub port: u16,
-    pub jwks: Vec<String>,
+    pub jwks: Vec<JwksConfiguration>,
     pub database: ConfigurationDatabase,
     pub empiricals: Empiricals,
 }
 
-pub fn prepare() -> Configuration {
+#[derive(Debug, Clone, serde::Deserialize)]
+pub struct JwksConfiguration {
+    pub issuer: String,
+    pub url: String,
+}
+
+pub fn prepare() -> Result<Configuration, Box<dyn Error + Send + Sync>> {
     info!("Configuring fpa-server...");
     let settings = Config::builder()
         .add_source(File::from(Path::new("config.yaml")))
-        .build()
-        .unwrap();
+        .build()?;
 
-    let scheme: String = settings.get("scheme").unwrap();
-    Configuration {
-        scheme: Scheme::from_str(scheme.as_str()).unwrap(),
-        authority: settings.get("authority").unwrap(),
-        port: settings.get("port").unwrap(),
-        jwks: settings.get("jwks").unwrap(),
+    let scheme: String = settings.get("scheme")?;
+    let configuration = Configuration {
+        scheme: Scheme::from_str(scheme.as_str())?,
+        authority: settings.get("authority")?,
+        port: settings.get("port")?,
+        jwks: settings.get("jwks")?,
         database: ConfigurationDatabase {
-            engine: settings.get("database.engine").unwrap(),
-            server: settings.get("database.server").unwrap(),
-            port: settings.get("database.port").unwrap(),
-            username: settings.get("database.username").unwrap(),
-            password: settings.get("database.password").unwrap(),
-            name: settings.get("database.name").unwrap(),
-            connections_max: settings.get("database.connections_max").unwrap(),
-            connections_min: settings.get("database.connections_min").unwrap(),
-            timeout_connect: settings.get("database.timeout_connect").unwrap(),
-            timeout_acquire: settings.get("database.timeout_acquire").unwrap(),
-            timeout_idle: settings.get("database.timeout_idle").unwrap(),
-            lifetime: settings.get("database.lifetime").unwrap(),
+            engine: settings.get("database.engine")?,
+            server: settings.get("database.server")?,
+            port: settings.get("database.port")?,
+            username: settings.get("database.username")?,
+            password: settings.get("database.password")?,
+            name: settings.get("database.name")?,
+            connections_max: settings.get("database.connections_max")?,
+            connections_min: settings.get("database.connections_min")?,
+            timeout_connect: settings.get("database.timeout_connect")?,
+            timeout_acquire: settings.get("database.timeout_acquire")?,
+            timeout_idle: settings.get("database.timeout_idle")?,
+            lifetime: settings.get("database.lifetime")?,
         },
         empiricals: Empiricals {
-            productivity: settings.get("empiricals.productivity").unwrap(),
-            coordination: settings.get("empiricals.coordination").unwrap(),
-            deployment: settings.get("empiricals.deployment").unwrap(),
-            planning: settings.get("empiricals.planning").unwrap(),
-            testing: settings.get("empiricals.testing").unwrap(),
+            productivity: settings.get("empiricals.productivity")?,
+            coordination: settings.get("empiricals.coordination")?,
+            deployment: settings.get("empiricals.deployment")?,
+            planning: settings.get("empiricals.planning")?,
+            testing: settings.get("empiricals.testing")?,
         },
+    };
+    if configuration.port == 0 || configuration.database.connections_min > configuration.database.connections_max {
+        return Err("invalid server or database pool configuration".into());
     }
+    if configuration.jwks.is_empty() || configuration.jwks.iter().any(|j| j.issuer.is_empty() || j.url.is_empty()) {
+        return Err("at least one valid JWKS issuer and URL must be configured".into());
+    }
+    Ok(configuration)
 }

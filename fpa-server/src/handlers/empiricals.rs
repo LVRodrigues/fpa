@@ -61,7 +61,7 @@ pub async fn list(
     conditions = conditions.add(frontiers::Column::Frontier.eq(frontier));
     conditions = conditions.add(frontiers::Column::Project.eq(project));
 
-    let frontier = match Frontiers::find().filter(conditions).one(&db).await.unwrap() {
+    let frontier = match Frontiers::find().filter(conditions).one(&db).await? {
         Some(v) => v,
         None => return Err(Error::NotFound),
     };
@@ -137,8 +137,7 @@ pub async fn update(
         .inner_join(Frontiers)
         .filter(conditions)
         .one(&db)
-        .await
-        .unwrap()
+        .await?
     {
         Some(v) => v,
         None => return Err(Error::NotFound),

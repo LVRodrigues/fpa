@@ -149,8 +149,8 @@ pub async fn create(
     let project: projects::Model = match project.insert(&db).await {
         Ok(v) => v,
         Err(e) => {
-            match e.sql_err().unwrap() {
-                sea_orm::SqlErr::UniqueConstraintViolation(_) => {
+            match e.sql_err() {
+                Some(sea_orm::SqlErr::UniqueConstraintViolation(_)) => {
                     return Err(Error::ProjectNameDuplicated)
                 }
                 _ => return Err(Error::ProjectCreate),
@@ -228,8 +228,8 @@ pub async fn update(
     let data: Model = match data.update(&db).await {
         Ok(v) => v,
         Err(e) => {
-            match e.sql_err().unwrap() {
-                sea_orm::SqlErr::UniqueConstraintViolation(_) => {
+            match e.sql_err() {
+                Some(sea_orm::SqlErr::UniqueConstraintViolation(_)) => {
                     return Err(Error::ProjectNameDuplicated)
                 }
                 _ => return Err(Error::ProjectUpdate),

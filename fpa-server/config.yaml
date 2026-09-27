@@ -1,7 +1,10 @@
 jwks: 
-  - http://oauth-2:8080/realms/default/protocol/openid-connect/certs
-  - http://oauth-2:8080/realms/tenant-01/protocol/openid-connect/certs
-  - http://oauth-2:8080/realms/tenant-02/protocol/openid-connect/certs
+  - issuer: http://oauth-2:8080/realms/default
+    url: http://oauth-2:8080/realms/default/protocol/openid-connect/certs
+  - issuer: http://oauth-2:8080/realms/tenant-01
+    url: http://oauth-2:8080/realms/tenant-01/protocol/openid-connect/certs
+  - issuer: http://oauth-2:8080/realms/tenant-02
+    url: http://oauth-2:8080/realms/tenant-02/protocol/openid-connect/certs
   
 database:
   engine: postgres
@@ -18,7 +21,7 @@ database:
   lifetime: 30
 
 scheme: HTTP
-authority: oauth-2
+authority: fpa-server
 port: 5000
 
 empiricals: 

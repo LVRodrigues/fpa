@@ -176,8 +176,8 @@ pub async fn create(
     let frontier = match frontier.insert(&db).await {
         Ok(v) => v,
         Err(e) => {
-            match e.sql_err().unwrap() {
-                sea_orm::SqlErr::UniqueConstraintViolation(_) => {
+            match e.sql_err() {
+                Some(sea_orm::SqlErr::UniqueConstraintViolation(_)) => {
                     return Err(Error::FrontierNameDuplicated)
                 }
                 _ => return Err(Error::FrontierCreate),
@@ -338,8 +338,8 @@ pub async fn update(
     let data: Model = match data.update(&db).await {
         Ok(v) => v,
         Err(e) => {
-            match e.sql_err().unwrap() {
-                sea_orm::SqlErr::UniqueConstraintViolation(_) => {
+            match e.sql_err() {
+                Some(sea_orm::SqlErr::UniqueConstraintViolation(_)) => {
                     return Err(Error::FrontierNameDuplicated)
                 }
                 _ => return Err(Error::FrontierUpdate),

@@ -19,41 +19,45 @@ mod mapper;
 mod model;
 mod state;
 
-pub async fn start() -> Result<(), Box<dyn Error>> {
-    let config = configuration::prepare();
+pub async fn start() -> Result<(), Box<dyn Error + Send + Sync>> {
+    let config = configuration::prepare()?;
+    jwks::prepare(&config).await?;
 
     let router = Router::new()
         .merge(SwaggerUi::new("/doc/swagger").url("/doc/openapi.json", docs::ApiDoc::openapi()))
         //.merge(RapiDoc::new("/doc/openapi.json").path("/doc/rapidoc"))
         .merge(Redoc::with_url("/", docs::ApiDoc::openapi()))
         .nest_service("/assets", get_service(ServeDir::new("./assets")))
-        .merge(handlers::router(config.clone()).await.unwrap());
+        .merge(handlers::router(config.clone()).await?);
 
     let address = SocketAddr::from(([0, 0, 0, 0], config.port));
     info!("APF Server listening on {}", address);
 
-    let listener = TcpListener::bind(address).await.unwrap();
+    let listener = TcpListener::bind(address).await?;
     axum::serve(listener, router.into_make_service())
         .with_graceful_shutdown(shutdown_signal())
-        .await
-        .unwrap();
+        .await?;
 
     Ok(())
 }
 
 async fn shutdown_signal() {
     let ctrl_c = async {
-        signal::ctrl_c()
-            .await
-            .expect("Failed to install Ctrl+C handler");
+        if let Err(error) = signal::ctrl_c().await {
+            ::log::error!("Failed to install Ctrl+C handler: {error}");
+            std::future::pending::<()>().await;
+        }
     };
 
     #[cfg(unix)]
     let terminate = async {
-        signal::unix::signal(signal::unix::SignalKind::terminate())
-            .expect("Failed to install signal handler")
-            .recv()
-            .await;
+        match signal::unix::signal(signal::unix::SignalKind::terminate()) {
+            Ok(mut signal) => { signal.recv().await; }
+            Err(error) => {
+                ::log::error!("Failed to install termination handler: {error}");
+                std::future::pending::<()>().await;
+            }
+        }
     };
 
     #[cfg(not(unix))]
