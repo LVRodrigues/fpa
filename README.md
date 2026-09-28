@@ -4,7 +4,7 @@ Project Management using Function Points Analysis.
 
 ![GitHub](https://img.shields.io/github/license/LVRodrigues/apf-calc?logo=readdotcv)
 
-![Static Badge](https://img.shields.io/badge/postgresql-17.2-blue?logo=postgresql)
+![Static Badge](https://img.shields.io/badge/postgresql-18.6-blue?logo=postgresql)
 ![Static Badge](https://img.shields.io/badge/RLS-yellow)
 ![Static Badge](https://img.shields.io/badge/Multi_Tennant-yellow)
 
@@ -21,7 +21,7 @@ Project Management using Function Points Analysis.
 ![Static Badge](https://img.shields.io/badge/OpenAPI-yellow)
 ![Static Badge](https://img.shields.io/badge/ReDOC-yellow)
 
-![Static Badge](https://img.shields.io/badge/angular-19.1.4-blue?logo=angular) 
+![Static Badge](https://img.shields.io/badge/angular-22.2-blue?logo=angular)
 ![Static Badge](https://img.shields.io/badge/SAAS-yellow)
 ![Static Badge](https://img.shields.io/badge/NGXecharts-yellow)
 ![Static Badge](https://img.shields.io/badge/RSA-yellow)

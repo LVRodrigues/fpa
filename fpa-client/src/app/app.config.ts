@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withInterceptors, withXhr } from '@angular/common/http';
 import { authConfig } from './auth.config';
 import { authInterceptor, provideAuth, withAppInitializerAuthCheck } from 'angular-auth-oidc-client';
 
@@ -13,6 +13,6 @@ export const appConfig: ApplicationConfig = {
 		provideRouter(routes),
 		provideAnimationsAsync(),
 		provideAuth(authConfig, withAppInitializerAuthCheck()),
-		provideHttpClient(withInterceptors([authInterceptor()])),
+		provideHttpClient(withXhr(), withInterceptors([authInterceptor()])),
 	]
 };
