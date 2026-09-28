@@ -3,16 +3,39 @@ services:
     build: ./database
     ports:
       - 5432:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -d fpa -U fpa-admin"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
   oauth-2:
     build: ./oauth-2
     ports:
       - 8080:8080
       - 8443:8443
+    healthcheck:
+      test: ["CMD-SHELL", "bash -ec 'exec 3<>/dev/tcp/127.0.0.1/8080'"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 20s
+
   fpa-server:
     build: ./fpa-server
-    ports: 
+    depends_on:
+      database:
+        condition: service_healthy
+      oauth-2:
+        condition: service_healthy
+    restart: on-failure
+    ports:
       - 5000:5000
+
   fpa-client:
     build: ./fpa-client
+    depends_on:
+      - fpa-server
     ports:
       - 80:80
